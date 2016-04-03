@@ -36,9 +36,6 @@ export default Ember.Route.extend({
       this.transitionTo('index');
     }, //// have to add commas (,) after actions accept for the last one as below ////
 
-    destroyRental(rental) {
-      rental.destroyRecord();
-      this.transitionTo('index'); //// returns to index page after the rental is deleted ////
-    }
+    
   }
 });
