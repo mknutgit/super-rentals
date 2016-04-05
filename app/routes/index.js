@@ -24,8 +24,13 @@ var rentals = [{
 }];
 
 export default Ember.Route.extend({
-  model(){ ///// Model hook - returns hard coded array of rentals /////
-    return this.store.findAll('rental');
+  model(){ ///// Model hook - returns hard coded array's /////
+    return Ember.RSVP.hash({
+      //// Ember.RSVP.hash is a method that allows multiple javascript promises at once as it only returns a promise once all promises are fulfilled ////
+      //// both of the following are 'promises' ////
+      cities: this.store.findAll('city'),
+      rentals: this.store.findAll('rental')
+    });
   },
 
   actions: {
@@ -34,7 +39,10 @@ export default Ember.Route.extend({
      newRental.save();
      this.transitionTo('index');
    },
-
-
+   addCity3(params) {
+     var newCity = this.store.createRecord('city', params);
+     newCity.save();
+     this.transitionTo('index');
+   },
  }
 });
